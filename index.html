@@ -271,38 +271,6 @@ h2 .ch{display:inline-block;opacity:0;transform:translateY(62%) rotate(5deg);tra
 </style>
 <script>
 (function(){var t=localStorage.getItem('pf-theme');if(!t){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}document.documentElement.dataset.theme=t;document.documentElement.classList.add('js');})();
-
-/* hero mouse parallax — elements pop toward you */
-const heroEl = document.querySelector('header');
-const layers = [['h1',20],['.avatar',12],['.typeline',14],['.lede',8],['.cube',34]];
-if (finePointer && !reduced && heroEl) {
-  heroEl.addEventListener('mousemove', e => {
-    const r = heroEl.getBoundingClientRect();
-    const x = (e.clientX-r.left)/r.width - .5, y = (e.clientY-r.top)/r.height - .5;
-    layers.forEach(([s,d]) => { const el = heroEl.querySelector(s); if (el) el.style.translate = `${(x*d).toFixed(1)}px ${(y*d).toFixed(1)}px`; });
-  });
-  heroEl.addEventListener('mouseleave', () => layers.forEach(([s]) => { const el = heroEl.querySelector(s); if (el) el.style.translate = ''; }));
-}
-/* custom cursor ring — lerp follow, grows on interactives */
-if (finePointer && !reduced) {
-  const cr = document.createElement('div'); cr.className = 'cur-ring'; document.body.appendChild(cr);
-  let tx = -50, ty = -50, x = -50, y = -50;
-  addEventListener('mousemove', e => {
-    tx = e.clientX; ty = e.clientY; cr.classList.add('on');
-    cr.classList.toggle('big', !!(e.target.closest && e.target.closest('a,button,.launch,.chip,.theme-btn')));
-  });
-  document.addEventListener('mouseleave', () => cr.classList.remove('on'));
-  (function lerp(){ x += (tx-x)*.16; y += (ty-y)*.16; cr.style.left = x+'px'; cr.style.top = y+'px'; requestAnimationFrame(lerp); })();
-}
-/* split-letter stagger on headings */
-if (!reduced) {
-  document.querySelectorAll('h2').forEach(hd => {
-    const t = hd.textContent; hd.setAttribute('aria-label', t); hd.textContent = '';
-    const w = document.createElement('span'); w.setAttribute('aria-hidden','true');
-    [...t].forEach((c,i) => { const s = document.createElement('span'); s.className = 'ch'; s.style.transitionDelay = (i*16)+'ms'; s.textContent = c === ' ' ? ' ' : c; w.appendChild(s); });
-    hd.appendChild(w);
-  });
-}
 </script>
 </head>
 <body>
@@ -541,6 +509,38 @@ if (!reduced) {
 <script>
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = matchMedia('(pointer:fine)').matches;
+
+/* hero mouse parallax — elements pop toward you */
+const heroEl = document.querySelector('header');
+const layers = [['h1',20],['.avatar',12],['.typeline',14],['.lede',8],['.cube',34]];
+if (finePointer && !reduced && heroEl) {
+  heroEl.addEventListener('mousemove', e => {
+    const r = heroEl.getBoundingClientRect();
+    const x = (e.clientX-r.left)/r.width - .5, y = (e.clientY-r.top)/r.height - .5;
+    layers.forEach(([s,d]) => { const el = heroEl.querySelector(s); if (el) el.style.translate = `${(x*d).toFixed(1)}px ${(y*d).toFixed(1)}px`; });
+  });
+  heroEl.addEventListener('mouseleave', () => layers.forEach(([s]) => { const el = heroEl.querySelector(s); if (el) el.style.translate = ''; }));
+}
+/* custom cursor ring — lerp follow, grows on interactives */
+if (finePointer && !reduced) {
+  const cr = document.createElement('div'); cr.className = 'cur-ring'; document.body.appendChild(cr);
+  let tx = -50, ty = -50, x = -50, y = -50;
+  addEventListener('mousemove', e => {
+    tx = e.clientX; ty = e.clientY; cr.classList.add('on');
+    cr.classList.toggle('big', !!(e.target.closest && e.target.closest('a,button,.launch,.chip,.theme-btn')));
+  });
+  document.addEventListener('mouseleave', () => cr.classList.remove('on'));
+  (function lerp(){ x += (tx-x)*.16; y += (ty-y)*.16; cr.style.left = x+'px'; cr.style.top = y+'px'; requestAnimationFrame(lerp); })();
+}
+/* split-letter stagger on headings */
+if (!reduced) {
+  document.querySelectorAll('h2').forEach(hd => {
+    const t = hd.textContent; hd.setAttribute('aria-label', t); hd.textContent = '';
+    const w = document.createElement('span'); w.setAttribute('aria-hidden','true');
+    [...t].forEach((c,i) => { const s = document.createElement('span'); s.className = 'ch'; s.style.transitionDelay = (i*16)+'ms'; s.textContent = c === ' ' ? ' ' : c; w.appendChild(s); });
+    hd.appendChild(w);
+  });
+}
 
 /* theme toggle */
 document.getElementById('themeBtn').addEventListener('click', () => {
