@@ -665,16 +665,18 @@ const SHIP = {
 const modal = document.getElementById('shipModal'), pane = document.getElementById('mPane'),
       mCode = document.getElementById('mCode'), mTerm = document.getElementById('mTerm'),
       mLive = document.getElementById('mLive'), mShotPg = document.getElementById('mShotPg');
-let shipTimers = [];
+let shipTimers = [], shipTrigger = null;
 function clearShip(){ shipTimers.forEach(clearTimeout); shipTimers = []; }
 function openShip(key){
   const d = SHIP[key]; if (!d) return;
+  shipTrigger = document.activeElement;
   clearShip();
   document.getElementById('mTitle').textContent = d.title;
   document.getElementById('mLink').href = d.link;
   mCode.innerHTML = ''; mTerm.innerHTML = ''; mLive.classList.remove('show');
   mShotPg.innerHTML = d.colors.map(c => `<div class="mini"><div class="mb" style="background:${c}"></div><div class="ml"></div><div class="ml s"></div></div>`).join('');
   modal.hidden = false; document.body.style.overflow = 'hidden';
+  document.getElementById('mClose').focus();
   pane.classList.remove('enter'); void pane.offsetWidth; pane.classList.add('enter');
   const termLines = ['$ npm run build','<span class="ok">✓ compiled — 0 errors</span>','$ deploy --prod','<span class="amberln">▲ uploading…</span>','<span class="ok">✅ live in production</span>'];
   if (reduced) {
@@ -705,14 +707,22 @@ function openShip(key){
   /* stage 3: live */
   function stage3(){ shipTimers.push(setTimeout(() => mLive.classList.add('show'), 250)); }
 }
-function closeShip(){ clearShip(); modal.hidden = true; document.body.style.overflow = ''; }
+function closeShip(){ clearShip(); modal.hidden = true; document.body.style.overflow = ''; if (shipTrigger) shipTrigger.focus(); shipTrigger = null; }
 document.querySelectorAll('.card.launch').forEach(c => {
   c.addEventListener('click', ev => { if (ev.target.closest('a')) return; openShip(c.dataset.project); });
   c.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); openShip(c.dataset.project); } });
 });
 document.getElementById('mClose').addEventListener('click', closeShip);
 document.getElementById('mBack').addEventListener('click', closeShip);
-addEventListener('keydown', ev => { if (ev.key === 'Escape' && !modal.hidden) closeShip(); });
+addEventListener('keydown', ev => {
+  if (modal.hidden) return;
+  if (ev.key === 'Escape') return closeShip();
+  if (ev.key !== 'Tab') return;
+  const f = [...pane.querySelectorAll('a[href],button')].filter(e => e.offsetParent);
+  const first = f[0], last = f[f.length - 1];
+  if (!pane.contains(document.activeElement) || (ev.shiftKey && document.activeElement === first)) { ev.preventDefault(); last.focus(); }
+  else if (!ev.shiftKey && document.activeElement === last) { ev.preventDefault(); first.focus(); }
+});
 </script>
 </body>
 </html>
