@@ -36,6 +36,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:cl
 ::selection{background:var(--amber);color:#000}
 a{color:var(--amber);text-decoration:none}
 a:hover{color:var(--amber-hi)}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;padding:8px 14px;border-radius:8px;background:var(--amber);color:#000;font-weight:600}
+.skip:focus{top:12px;color:#000}
+main:focus{outline:none}
 :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:8px}
 img{max-width:100%;display:block}
 .wrap{width:min(1520px,100% - clamp(28px,5vw,64px));margin:0 auto}
@@ -274,6 +277,7 @@ h2 .ch{display:inline-block;opacity:0;transform:translateY(62%) rotate(5deg);tra
 </script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div id="progress" aria-hidden="true"></div>
 <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i></div>
 
@@ -287,6 +291,7 @@ h2 .ch{display:inline-block;opacity:0;transform:translateY(62%) rotate(5deg);tra
   </div>
 </div></nav>
 
+<main id="main" tabindex="-1">
 <header class="wrap" id="top">
   <div class="cube" aria-hidden="true"><i class="f1"></i><i class="f2"></i><i class="f3"></i><i class="f4"></i><i class="f5"></i><i class="f6"></i></div>
   <div>
@@ -480,6 +485,7 @@ h2 .ch{display:inline-block;opacity:0;transform:translateY(62%) rotate(5deg);tra
     <p style="font-family:var(--mono);font-size:.7rem;color:var(--dim);margin-top:22px">Gurugram, India · usually replies within a day</p>
   </div>
 </div></section>
+</main>
 
 <footer class="wrap"><div class="f">
   <span>© 2026 Adityaraj Singh</span>

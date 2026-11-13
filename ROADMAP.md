@@ -3,7 +3,7 @@
 Single-page portfolio (`index.html`, no build step). Gate: `npx --yes html-validate index.html`.
 
 ## Accessibility
-- [ ] Keyboard user can skip the nav and jump straight to the main content (skip link + `<main>` landmark).
+- [x] Keyboard user can skip the nav and jump straight to the main content (skip link + `<main>` landmark).
 - [ ] Theme toggle exposes its state (`aria-pressed`) and the label reflects the current theme.
 - [ ] Modal traps focus, closes on Esc and returns focus to the trigger.
 - [ ] Marquee and typed text pause for users with `prefers-reduced-motion` (verify existing handling).
