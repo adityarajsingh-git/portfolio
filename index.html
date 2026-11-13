@@ -589,7 +589,7 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 /* scroll-spy */
 const links = [...document.querySelectorAll('#navLinks a')];
 const spy = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#'+e.target.id));
+  if (e.isIntersecting) links.forEach(l => { const on = l.getAttribute('href') === '#'+e.target.id; l.classList.toggle('active', on); on ? l.setAttribute('aria-current','true') : l.removeAttribute('aria-current'); });
 }), {rootMargin:'-40% 0px -55% 0px'});
 ['work','experience','skills','contact'].forEach(id => { const el = document.getElementById(id); if (el) spy.observe(el); });
 

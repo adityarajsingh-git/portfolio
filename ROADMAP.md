@@ -6,8 +6,8 @@ Single-page portfolio (`index.html`, no build step). Gate: `npx --yes html-valid
 - [x] Keyboard user can skip the nav and jump straight to the main content (skip link + `<main>` landmark).
 - [x] Theme toggle exposes its state (`aria-pressed`, fixed label "Dark theme"; pressed = dark).
 - [x] Modal traps focus, closes on Esc and returns focus to the trigger.
-- [ ] Marquee and typed text pause for users with `prefers-reduced-motion` (verify existing handling).
-- [ ] Nav link for the section in view is marked `aria-current`.
+- [x] Marquee and typed text pause for users with `prefers-reduced-motion` (already shipped).
+- [x] Nav link for the section in view is marked `aria-current`.
 
 ## Sharing / SEO
 - [ ] Sharing the link shows a title, description and image preview (Open Graph + Twitter tags). (owner: needs preview image)
@@ -17,7 +17,7 @@ Single-page portfolio (`index.html`, no build step). Gate: `npx --yes html-valid
 ## Reliability / performance
 - [ ] Page renders with readable fallback fonts when Google Fonts fails to load.
 - [ ] Below-the-fold images lazy-load and have explicit width/height (no layout shift).
-- [ ] Page works with JavaScript disabled (reveal sections are visible without JS).
+- [x] Page works with JavaScript disabled (already shipped: reveal hiding is scoped to `html.js`).
 
 ## Content
 - [ ] Resume download shows file size/format in the label.
