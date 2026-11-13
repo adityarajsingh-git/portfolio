@@ -287,7 +287,7 @@ h2 .ch{display:inline-block;opacity:0;transform:translateY(62%) rotate(5deg);tra
     <div class="nav-links" id="navLinks">
       <a href="#work">Work</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
     </div>
-    <button class="theme-btn" id="themeBtn" aria-label="Toggle light/dark theme">◐</button>
+    <button class="theme-btn" id="themeBtn" aria-label="Dark theme" aria-pressed="true">◐</button>
   </div>
 </div></nav>
 
@@ -548,10 +548,14 @@ if (!reduced) {
 }
 
 /* theme toggle */
-document.getElementById('themeBtn').addEventListener('click', () => {
+const themeBtn = document.getElementById('themeBtn');
+const syncThemeBtn = () => themeBtn.setAttribute('aria-pressed', document.documentElement.dataset.theme === 'dark');
+syncThemeBtn();
+themeBtn.addEventListener('click', () => {
   const h = document.documentElement;
   h.dataset.theme = h.dataset.theme === 'dark' ? 'light' : 'dark';
   localStorage.setItem('pf-theme', h.dataset.theme);
+  syncThemeBtn();
 });
 
 /* typing — starts full, never blank on load */
