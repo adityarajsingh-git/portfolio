@@ -15,7 +15,7 @@ Single-page portfolio (`index.html`, no build step). Gate: `npx --yes html-valid
 - [ ] Search engines get a canonical URL. (owner: final domain)
 
 ## Reliability / performance
-- [ ] Page renders with readable fallback fonts when Google Fonts fails to load.
+- [x] Page renders with readable system fallback fonts when Google Fonts fails to load (fallback stacks on `--disp`, `--body`, `--mono`).
 - [ ] Below-the-fold images lazy-load and have explicit width/height (no layout shift).
 - [x] Page works with JavaScript disabled (already shipped: reveal hiding is scoped to `html.js`).
 
