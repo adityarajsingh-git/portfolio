@@ -11,7 +11,7 @@ Single-page portfolio (`index.html`, no build step). Gate: `npx --yes html-valid
 
 ## Sharing / SEO
 - [ ] Sharing the link shows a title, description and image preview (Open Graph + Twitter tags). (owner: needs preview image)
-- [ ] Browser UI colour matches the theme (`theme-color`).
+- [x] Browser UI colour matches the theme (`theme-color`, follows the toggle).
 - [ ] Search engines get a canonical URL. (owner: final domain)
 
 ## Reliability / performance

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Adityaraj Singh — Software Development Engineer</title>
 <meta name="description" content="Adityaraj Singh — SDE building production web and mobile apps. React, React Native, TypeScript, Java, .NET."/>
+<meta name="theme-color" content="#000000"/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -549,7 +550,10 @@ if (!reduced) {
 
 /* theme toggle */
 const themeBtn = document.getElementById('themeBtn');
-const syncThemeBtn = () => themeBtn.setAttribute('aria-pressed', document.documentElement.dataset.theme === 'dark');
+const syncThemeBtn = () => {
+  themeBtn.setAttribute('aria-pressed', document.documentElement.dataset.theme === 'dark');
+  document.querySelector('meta[name="theme-color"]').content = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+};
 syncThemeBtn();
 themeBtn.addEventListener('click', () => {
   const h = document.documentElement;
