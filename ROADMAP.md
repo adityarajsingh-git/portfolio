@@ -16,11 +16,11 @@ Single-page portfolio (`index.html`, no build step). Gate: `npx --yes html-valid
 
 ## Reliability / performance
 - [x] Page renders with readable system fallback fonts when Google Fonts fails to load (fallback stacks on `--disp`, `--body`, `--mono`).
-- [ ] Below-the-fold images lazy-load and have explicit width/height (no layout shift).
+- [x] Below-the-fold images lazy-load and have explicit width/height (already shipped: the only image is the above-the-fold avatar, which has width/height; lazy-loading it would hurt LCP).
 - [x] Page works with JavaScript disabled (already shipped: reveal hiding is scoped to `html.js`).
 
 ## Content
-- [ ] Resume download shows file size/format in the label.
+- [x] Resume download shows file size/format in the label ("Résumé ↓ (PDF, N KB)"; size is hardcoded, update when resume.pdf changes).
 - [ ] 404 page that links back home. (owner: hosting)
 
 ## Shipped
