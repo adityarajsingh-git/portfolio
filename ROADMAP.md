@@ -24,7 +24,7 @@ Single-page portfolio (`index.html`, no build step). Gate: `npx --yes html-valid
 - [ ] 404 page that links back home. (owner: hosting)
 
 ## Polish (added in refresh)
-- [ ] Native scrollbars and form controls follow the active theme (`color-scheme`).
+- [x] Native scrollbars and form controls follow the active theme (`color-scheme`).
 - [ ] Section anchor jumps land with the heading clear of the sticky nav (`scroll-margin-top`).
 - [ ] User can copy the contact email with one click and gets "Copied" feedback.
 - [ ] Printing the page produces a clean, light, single-column layout (print stylesheet hides aurora/3D/nav).
