@@ -25,7 +25,7 @@ Single-page portfolio (`index.html`, no build step). Gate: `npx --yes html-valid
 
 ## Polish (added in refresh)
 - [x] Native scrollbars and form controls follow the active theme (`color-scheme`).
-- [ ] Section anchor jumps land with the heading clear of the sticky nav (`scroll-margin-top`).
+- [x] Section anchor jumps land with the heading clear of the sticky nav (`scroll-margin-top: 72px` on `section`).
 - [ ] User can copy the contact email with one click and gets "Copied" feedback.
 - [ ] Printing the page produces a clean, light, single-column layout (print stylesheet hides aurora/3D/nav).
 - [ ] External links that open a new tab say so to screen readers (visually hidden "(opens in new tab)").
