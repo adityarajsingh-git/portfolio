@@ -41,6 +41,7 @@ a{color:var(--amber);text-decoration:none}
 a:hover{color:var(--amber-hi)}
 .skip{position:absolute;left:12px;top:-60px;z-index:100;padding:8px 14px;border-radius:8px;background:var(--amber);color:#000;font-weight:600}
 .skip:focus{top:12px;color:#000}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 main:focus{outline:none}
 :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:8px}
 img{max-width:100%;display:block}
@@ -196,6 +197,9 @@ h2{font-family:var(--disp);font-weight:700;color:var(--ink);font-size:clamp(1.6r
 .contact-card p{max-width:50ch;margin:8px auto 28px}
 .mail{display:inline-block;font-family:var(--disp);font-weight:600;color:var(--ink);font-size:clamp(.95rem,2.6vw,1.3rem);border-bottom:2px solid var(--amber);padding-bottom:2px;overflow-wrap:anywhere}
 .mail:hover{color:var(--amber)}
+.copy-mail{display:none;margin-left:10px;font-family:var(--mono);font-size:.72rem;color:var(--dim);background:none;border:1px solid currentColor;border-radius:999px;padding:3px 10px;cursor:pointer}
+.copy-mail:hover{color:var(--amber)}
+html.js .copy-mail{display:inline-block}
 .socials{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:28px}
 footer{padding:28px 0 44px}
 .f{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:.72rem;color:var(--dim)}
@@ -479,7 +483,7 @@ h2 .ch{display:inline-block;opacity:0;transform:translateY(62%) rotate(5deg);tra
   <div class="sec-eyebrow">// contact</div>
     <h2>Have something worth building?</h2>
     <p>Roles, side projects, or a good conversation about shipping to web and mobile at the same time.</p>
-    <a class="mail" href="mailto:adityarajsingh.code@gmail.com">adityarajsingh.code@gmail.com</a>
+    <a class="mail" href="mailto:adityarajsingh.code@gmail.com">adityarajsingh.code@gmail.com</a><button type="button" class="copy-mail" id="copyMail">Copy</button><span class="sr-only" role="status" id="copyStatus"></span>
     <div class="socials">
       <a class="btn btn-glow" href="resume.pdf" download="Adityaraj_Singh_Resume.pdf">Résumé ↓ <small>(PDF, 63 KB)</small></a>
       <a class="btn btn-glass" href="https://github.com/adityarajsingh-git" target="_blank" rel="noopener">GitHub</a>
@@ -592,6 +596,14 @@ const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
 }), {threshold:.07});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* copy contact email */
+const copyBtn = document.getElementById('copyMail');
+if (copyBtn) copyBtn.addEventListener('click', async () => {
+  const set = (t, s) => { copyBtn.textContent = t; document.getElementById('copyStatus').textContent = s; setTimeout(() => { copyBtn.textContent = 'Copy'; document.getElementById('copyStatus').textContent = ''; }, 2000); };
+  try { await navigator.clipboard.writeText(document.querySelector('.mail').textContent); set('Copied', 'Email copied'); }
+  catch (e) { set('Copy failed', 'Copy failed, select the address manually'); }
+});
 
 /* scroll-spy */
 const links = [...document.querySelectorAll('#navLinks a')];
